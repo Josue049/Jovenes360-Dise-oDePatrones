@@ -4,9 +4,9 @@
  */
 package Includify;
 
-import Includify.empleo.EmpleosServices;
+import Modelo.EmpleosServices;
 import java.util.Scanner;
-import usuario.EmpresaServices;
+import Modelo.EmpresaServices;
 
 /**
  *
