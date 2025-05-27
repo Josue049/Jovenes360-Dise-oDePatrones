@@ -329,10 +329,14 @@ public class Vista2 extends javax.swing.JFrame {
             // Aquí tu lógica de postulación
             System.out.println("Postulando a: " + titulo);
             JOptionPane.showMessageDialog(this, "Postulación enviada a: " + titulo);
+            
+            new Vista3(titulo, descripcion, requisitos).setVisible(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione un empleo primero", 
                 "Error", JOptionPane.WARNING_MESSAGE);
         }
+        
     }//GEN-LAST:event_BtnPostularActionPerformed
 
     /**
