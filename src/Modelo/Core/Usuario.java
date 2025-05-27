@@ -4,7 +4,6 @@
  */
 package Modelo.Core;
 
-import Modelo.Certificaciones.Certificado;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -43,10 +42,6 @@ public abstract class Usuario {
 
     public Rol getRol() { return rol; }
     public void setRol(Rol rol) { this.rol = rol; }
-
-    public List<Certificado> getCertificados() {
-        return certificados;
-    }
 
     // 🔹 Getter de habilidades
     public List<String> getHabilidades() {
