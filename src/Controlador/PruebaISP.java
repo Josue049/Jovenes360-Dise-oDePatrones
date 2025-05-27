@@ -25,8 +25,8 @@ public class PruebaISP {
         procesarRecomendaciones(recomendadorCursos, candidato);
     }
 
-    public static void procesarRecomendaciones(Recomendador recomendador, Usuario usuario) {
-        List<String> recomendaciones = recomendador.generarRecomendaciones(usuario);
+    public static void procesarRecomendaciones(Recomendador recomendador, List<String> habilida) {
+        List<String> recomendaciones = recomendador.generarRecomendaciones(habilida);
         
         if (recomendaciones.isEmpty()) {
             System.out.println("No se encontraron coincidencias.");

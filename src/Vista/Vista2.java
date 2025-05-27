@@ -4,6 +4,13 @@
  */
 package Vista;
 
+import Modelo.GestionEmpleos.Empleo;
+import Modelo.Recomendaciones.Recomendador;
+import Modelo.Recomendaciones.RecomendadorEmpleos;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author EQUIPO
@@ -14,11 +21,63 @@ public class Vista2 extends javax.swing.JFrame {
 
     /**
      * Creates new form Vista2
+     * 
      */
+    
     public Vista2() {
         initComponents();
     }
 
+    Recomendador recomendadorEmpleos = new RecomendadorEmpleos();
+
+    public Vista2(List<String> habilidades) {
+    initComponents();
+    
+    // Usar las habilidades recibidas
+    for (String habilidad : habilidades) {
+        System.out.println(habilidad); // O agregar a un componente visual
+    }
+    
+    procesarRecomendaciones(recomendadorEmpleos, habilidades);
+    
+    
+}
+    
+    public void procesarRecomendaciones(Recomendador recomendador, List<String> habilida) {
+        List<Empleo> recomendaciones = recomendador.generarRecomendaciones(habilida);
+        
+        System.out.println("hola+"+recomendaciones);
+        
+        if (recomendaciones.isEmpty()) {
+            System.out.println("No se encontraron coincidencias.");
+        } else {
+            recomendaciones.forEach(empleo -> 
+                System.out.println("- " + empleo)
+            );
+        }
+        
+        DefaultTableModel model = new DefaultTableModel(
+            new Object[]{"Título", "Descripción", "Requisitos"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Hacer que la tabla no sea editable
+            }
+        };
+        
+        for (Empleo empleo : recomendaciones) {
+            model.addRow(new Object[]{
+                empleo.getTitulo(),
+                empleo.getDescripcion(),
+                String.join(", ", empleo.getRequisitos())
+            });
+        }
+        
+        tableRecomendados.setModel(model);
+
+        
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,6 +87,8 @@ public class Vista2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        BtnPostular = new javax.swing.JMenuItem();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -37,10 +98,18 @@ public class Vista2 extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableRecomendados = new javax.swing.JTable();
+
+        BtnPostular.setText("POSTULAR");
+        BtnPostular.setComponentPopupMenu(jPopupMenu1);
+        BtnPostular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPostularActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(BtnPostular);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusTraversalPolicyProvider(true);
@@ -148,16 +217,16 @@ public class Vista2 extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton2.setText("ATRAS");
         jButton2.setBorder(null);
-
-        jButton3.setBackground(new java.awt.Color(76, 175, 80));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setText("SIGUIENTE");
-        jButton3.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setText("Empleos Recomendados");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableRecomendados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -180,9 +249,10 @@ public class Vista2 extends javax.swing.JFrame {
                 "Titulo", "Descripción", "Requisitos"
             }
         ));
-        jTable1.setShowHorizontalLines(true);
-        jTable1.setShowVerticalLines(true);
-        jScrollPane1.setViewportView(jTable1);
+        tableRecomendados.setComponentPopupMenu(jPopupMenu1);
+        tableRecomendados.setShowHorizontalLines(true);
+        tableRecomendados.setShowVerticalLines(true);
+        jScrollPane1.setViewportView(tableRecomendados);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -191,9 +261,7 @@ public class Vista2 extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addGap(32, 459, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,9 +283,7 @@ public class Vista2 extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(154, 154, 154))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(72, 72, 72))))
         );
 
@@ -243,6 +309,31 @@ public class Vista2 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new Vista1().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void BtnPostularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPostularActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tableRecomendados.getSelectedRow();
+
+        if (selectedRow >= 0) { // Verificar que hay una fila seleccionada
+            DefaultTableModel model = (DefaultTableModel) tableRecomendados.getModel();
+            String titulo = (String) model.getValueAt(selectedRow, 0);
+            String descripcion = (String) model.getValueAt(selectedRow, 1);
+            String requisitos = (String) model.getValueAt(selectedRow, 2);
+
+            // Aquí tu lógica de postulación
+            System.out.println("Postulando a: " + titulo);
+            JOptionPane.showMessageDialog(this, "Postulación enviada a: " + titulo);
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un empleo primero", 
+                "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_BtnPostularActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,8 +361,8 @@ public class Vista2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem BtnPostular;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -281,7 +372,8 @@ public class Vista2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableRecomendados;
     // End of variables declaration//GEN-END:variables
 }
