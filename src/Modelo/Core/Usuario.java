@@ -18,8 +18,8 @@ public abstract class Usuario {
     protected String email;
     protected String contraseña;
     protected Rol rol;
-    private List<Certificado> certificados;
     private List<String> habilidades; // 🔹 NUEVO
+    private List<String> postulados;
 
     public Usuario(String nombre, String email, String contraseña, Rol rol) {
         this.nombre = nombre;
