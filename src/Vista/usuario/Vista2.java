@@ -44,37 +44,7 @@ public class Vista2 extends javax.swing.JFrame {
 }
     
     public void procesarRecomendaciones(Recomendador recomendador, List<String> habilida) {
-        List<Empleo> recomendaciones = recomendador.generarRecomendaciones(habilida);
-        
-        System.out.println("hola+"+recomendaciones);
-        
-        if (recomendaciones.isEmpty()) {
-            System.out.println("No se encontraron coincidencias.");
-        } else {
-            recomendaciones.forEach(empleo -> 
-                System.out.println("- " + empleo)
-            );
-        }
-        
-        DefaultTableModel model = new DefaultTableModel(
-            new Object[]{"Título", "Descripción", "Requisitos"}, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // Hacer que la tabla no sea editable
-            }
-        };
-        
-        for (Empleo empleo : recomendaciones) {
-            model.addRow(new Object[]{
-                empleo.getTitulo(),
-                empleo.getDescripcion(),
-                String.join(", ", empleo.getRequisitos())
-            });
-        }
-        
-        tableRecomendados.setModel(model);
-
-        
+       
     }
 
     

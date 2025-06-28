@@ -12,9 +12,8 @@ import java.util.List;
 
 public class Candidato extends Usuario {
 
-    public Candidato(String nombre, String email, String contraseña, List<String> habilidades) {
+    public Candidato(String nombre, String email, String contraseña) {
         super(nombre, email, contraseña, Rol.CANDIDATO);
-        this.setHabilidades(habilidades);
     }
 
     @Override

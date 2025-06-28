@@ -312,7 +312,7 @@ public class CrearEmpleo extends javax.swing.JFrame {
         String descripcion = jTextField12.getText();
         Date fechaPublicacion = new Date();
         
-        Empleo empleo = new Empleo(modalidad, salario, fechaPublicacion ,descripcion, area);
+        Empleo empleo = new Empleo(modalidad, salario,descripcion , fechaPublicacion, area);
         empleoService.crearEmpleo(empleo);      
     }//GEN-LAST:event_jButton1ActionPerformed
 
