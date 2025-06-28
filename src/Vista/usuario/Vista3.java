@@ -15,9 +15,11 @@ public class Vista3 extends javax.swing.JFrame {
     /**
      * Creates new form Vista3
      */
-    public Vista3() {
+    public Vista3(String modalidad, String salario, String descripcion, String fecha, String area) {
         initComponents();
     }
+    
+ 
     
     public Vista3(String txt1, String txt2, String txt3) {
         initComponents();
@@ -287,7 +289,6 @@ public class Vista3 extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Vista3().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -7,6 +7,7 @@ package Vista.usuario;
 import Modelo.GestionEmpleos.Empleo;
 import Modelo.Recomendaciones.Recomendador;
 import Modelo.Recomendaciones.RecomendadorEmpleos;
+import Repository.EmpleoRepository;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Vista2 extends javax.swing.JFrame {
     
+    EmpleoRepository empleoRepository;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Vista2.class.getName());
 
     /**
@@ -26,28 +29,51 @@ public class Vista2 extends javax.swing.JFrame {
     
     public Vista2() {
         initComponents();
+        this.empleoRepository = new EmpleoRepository();
+
+        List<Empleo> empleosRecomendados = empleoRepository.obtenerTodos();
+
+        DefaultTableModel model = new DefaultTableModel(new String[]{
+            "Titulo","Modalidad", "Salario", "Descripcion", "Fecha Publicacion", "Area"
+        }, 0);
+
+        for (Empleo empleo : empleosRecomendados) {
+            String titulo = empleo.getTitulo();
+            String modalidad = empleo.getModalidad();
+            double salario = empleo.getSalario();
+            String descripcion = empleo.getDescripcion();
+            String fechaPublicacion = empleo.getFechaPublicacion().toString();
+            String area = empleo.getArea();
+
+            model.addRow(new Object[]{modalidad, salario, descripcion, fechaPublicacion, area});
+        }
+
+        tableRecomendados.setModel(model);
+        // Acción al hacer clic en una fila de la tabla
+        tableRecomendados.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int selectedRow = tableRecomendados.getSelectedRow();
+
+                if (selectedRow != -1 && evt.getClickCount() == 1) {
+                    DefaultTableModel model = (DefaultTableModel) tableRecomendados.getModel();
+
+                    String modalidad = (String) model.getValueAt(selectedRow, 0);
+                    String salario = model.getValueAt(selectedRow, 1).toString();
+                    String descripcion = (String) model.getValueAt(selectedRow, 2);
+                    String fecha = (String) model.getValueAt(selectedRow, 3);
+                    String area = (String) model.getValueAt(selectedRow, 4);
+
+                    new Vista3(modalidad, salario, descripcion, fecha, area).setVisible(true);
+                    dispose();
+                }
+            }
+        });
+
     }
+
 
     Recomendador recomendadorEmpleos = new RecomendadorEmpleos();
-
-    public Vista2(List<String> habilidades) {
-    initComponents();
-    
-    // Usar las habilidades recibidas
-    for (String habilidad : habilidades) {
-        System.out.println(habilidad); // O agregar a un componente visual
-    }
-    
-    procesarRecomendaciones(recomendadorEmpleos, habilidades);
-    
-    
-}
-    
-    public void procesarRecomendaciones(Recomendador recomendador, List<String> habilida) {
-       
-    }
-
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -197,25 +223,25 @@ public class Vista2 extends javax.swing.JFrame {
 
         tableRecomendados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Titulo", "Descripción", "Requisitos"
+                "Titulo", "Modalidad", "Salario", "Descripcion", "fecha Publicacion", "Area"
             }
         ));
         tableRecomendados.setComponentPopupMenu(jPopupMenu1);
@@ -227,19 +253,19 @@ public class Vista2 extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 459, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(183, 183, 183))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(183, 183, 183))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 459, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,22 +311,15 @@ public class Vista2 extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
     private void BtnPostularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPostularActionPerformed
         // TODO add your handling code here:
         int selectedRow = tableRecomendados.getSelectedRow();
 
         if (selectedRow >= 0) { // Verificar que hay una fila seleccionada
             DefaultTableModel model = (DefaultTableModel) tableRecomendados.getModel();
-            String titulo = (String) model.getValueAt(selectedRow, 0);
-            String descripcion = (String) model.getValueAt(selectedRow, 1);
-            String requisitos = (String) model.getValueAt(selectedRow, 2);
-
-            // Aquí tu lógica de postulación
-            System.out.println("Postulando a: " + titulo);
-            JOptionPane.showMessageDialog(this, "Postulación enviada a: " + titulo);
-            
-            new Vista3(titulo, descripcion, requisitos).setVisible(true);
-            this.dispose();
+            String descripcion = (String) model.getValueAt(selectedRow, 0);
+            String requisitos = (String) model.getValueAt(selectedRow, 1);
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione un empleo primero", 
                 "Error", JOptionPane.WARNING_MESSAGE);

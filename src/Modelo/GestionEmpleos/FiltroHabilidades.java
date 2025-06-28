@@ -25,26 +25,13 @@ public class FiltroHabilidades implements FiltroBusqueda {
 
     // Devuelve empleos compatibles (tienen al menos una habilidad del usuario)
     public List<Empleo> filtrarEmpleosCompatibles() {
-        return empleos.stream()
-            .filter(empleo -> empleo.getRequisitos().stream()
-                .anyMatch(habilidadesRequeridas::contains))
-            .collect(Collectors.toList());
+        return null;
     }
 
     // Devuelve habilidades faltantes para empleos compatibles
     @Override
     public List<String> filtrar() {
-        List<Empleo> empleosCompatibles = filtrarEmpleosCompatibles();
-
-        Set<String> habilidadesFaltantes = new HashSet<>();
-        for (Empleo empleo : empleosCompatibles) {
-            for (String req : empleo.getRequisitos()) {
-                if (!habilidadesRequeridas.contains(req)) {
-                    habilidadesFaltantes.add(req);
-                }
-            }
-        }
-        return new ArrayList<>(habilidadesFaltantes);
+        return null;
     }
 
     // Getters y setters si necesitas

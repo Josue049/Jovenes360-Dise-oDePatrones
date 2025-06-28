@@ -15,6 +15,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class RecomendadorEmpleos implements Recomendador {
+
+    @Override
+    public List<Empleo> generarRecomendaciones(List<String> habil) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 
 }
