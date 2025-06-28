@@ -6,6 +6,7 @@ package Modelo.Servicios;
 
 import Modelo.GestionEmpleos.Empleo;
 import Repository.EmpleoRepository;
+import java.util.List;
 
 /**
  *
@@ -23,5 +24,7 @@ public class EmpleoService {
         empleoRepository.crear(empleo);
     }
 
-    
+    public List<Empleo> obtenerEmpleosPorEmpresa(int idEmpresa) {
+        return empleoRepository.obtenerPorEmpresa(idEmpresa);
+    }
 }

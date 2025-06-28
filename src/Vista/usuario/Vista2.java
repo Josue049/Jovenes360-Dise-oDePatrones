@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Vista2 extends javax.swing.JFrame {
     
-    EmpleoRepository empleoRepository;
+    private EmpleoRepository empleoRepository;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Vista2.class.getName());
 

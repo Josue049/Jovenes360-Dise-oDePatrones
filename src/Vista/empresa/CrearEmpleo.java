@@ -15,6 +15,7 @@ import java.util.Date;
  */
 public class CrearEmpleo extends javax.swing.JFrame {
     
+    private int idEmpresa;
     private EmpleoService empleoService;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CrearEmpleo.class.getName());
@@ -22,11 +23,18 @@ public class CrearEmpleo extends javax.swing.JFrame {
     /**
      * Creates new form CrearEmpleo
      */
+    public CrearEmpleo(int idEmpresa) {
+        initComponents();
+        this.idEmpresa = idEmpresa;
+        this.empleoService = new EmpleoService();
+    }
+    
     public CrearEmpleo() {
         initComponents();
         this.empleoService = new EmpleoService();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -94,7 +102,7 @@ public class CrearEmpleo extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(144, Short.MAX_VALUE)
+                .addContainerGap(154, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(40, 40, 40))
         );
@@ -218,7 +226,7 @@ public class CrearEmpleo extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                                     .addComponent(jTextField3)
                                     .addComponent(jTextField2)
                                     .addComponent(jTextField12, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -292,10 +300,10 @@ public class CrearEmpleo extends javax.swing.JFrame {
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 483, Short.MAX_VALUE))
+                .addGap(0, 509, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(58, Short.MAX_VALUE)
+                    .addContainerGap(84, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
@@ -324,8 +332,11 @@ public class CrearEmpleo extends javax.swing.JFrame {
         String descripcion = jTextField12.getText();
         Date fechaPublicacion = new Date();
         
-        Empleo empleo = new Empleo(titulo, modalidad, salario,descripcion , fechaPublicacion, area);
+        Empleo empleo = new Empleo(idEmpresa,titulo, modalidad, salario,descripcion , fechaPublicacion, area);
         empleoService.crearEmpleo(empleo);      
+        VerEmpleo verEmpleo = new VerEmpleo(idEmpresa);
+        verEmpleo.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
@@ -356,9 +367,10 @@ public class CrearEmpleo extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        java.awt.EventQueue.invokeLater(() -> {
+        new CrearEmpleo().setVisible(true);  
+    });
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new CrearEmpleo().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -11,10 +11,12 @@ package Modelo.Servicios;
 import Modelo.Core.Candidato;
 import Modelo.Certificaciones.Certificado;
 import Repository.CandidatoRepository;
+import Repository.UsuarioRepository;
 
 public class CandidatoService {
     
     private CandidatoRepository candidatoRepository;
+    private UsuarioRepository usuarioRepository;
 
     public CandidatoService() {
         this.candidatoRepository = new CandidatoRepository();
@@ -29,5 +31,9 @@ public class CandidatoService {
     public void subirCertificado(Candidato candidato, Certificado cert) {
         // Lógica para subir certificado
         System.out.println("Certificado subido para " + candidato.getNombre());
+    }
+    
+    public int iniciarSesion(String email, String contrasena) {
+        return usuarioRepository.iniciarSesion(email, contrasena);
     }
 }

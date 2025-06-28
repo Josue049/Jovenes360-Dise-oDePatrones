@@ -21,7 +21,7 @@ public class CrudBase<T> implements CrudRepository<T> {
     }
 
     @Override
-    public void crear(T entidad) {
+    public int crear(T entidad) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

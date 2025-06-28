@@ -11,7 +11,7 @@ import java.util.List;
  * @author Equipo
  */
 public interface CrudRepository<T> {
-    void crear(T entidad);
+    int crear(T entidad);
     T obtenerPorId(int id);
     List<T> obtenerTodos();
     void actualizar(T entidad);

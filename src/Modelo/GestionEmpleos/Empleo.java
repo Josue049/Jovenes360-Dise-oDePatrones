@@ -11,6 +11,7 @@ package Modelo.GestionEmpleos;
 import java.util.Date;
 
 public class Empleo {
+    private int idEmpresa;
     private String titulo;
     private String modalidad;
     private double salario;
@@ -20,7 +21,8 @@ public class Empleo {
 
     // Constructor
 
-    public Empleo(String titulo, String modalidad, double salario, String descripcion, Date fechaPublicacion, String area) {
+    public Empleo(int idEmpresa, String titulo, String modalidad, double salario, String descripcion, Date fechaPublicacion, String area) {
+        this.idEmpresa = idEmpresa;
         this.titulo = titulo;
         this.modalidad = modalidad;
         this.salario = salario;
@@ -28,8 +30,9 @@ public class Empleo {
         this.fechaPublicacion = fechaPublicacion;
         this.area = area;
     }
-    
 
+    
+   
     public Empleo() {
     }
 
@@ -80,6 +83,18 @@ public class Empleo {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+
+    public int getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
+    public void setId(int aInt) {
+        this.idEmpresa = aInt;
+    }
     
-    
+       
 }
