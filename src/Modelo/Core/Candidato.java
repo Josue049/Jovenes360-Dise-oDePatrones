@@ -11,12 +11,10 @@ package Modelo.Core;
 import java.util.List;
 
 public class Candidato extends Usuario {
-    private String cv;
 
-    public Candidato(String nombre, String email, String contraseña, List<String> habilidades, String cv) {
+    public Candidato(String nombre, String email, String contraseña, List<String> habilidades) {
         super(nombre, email, contraseña, Rol.CANDIDATO);
-        this.setHabilidades(habilidades); // 💡 Usa el setter de Usuario
-        this.cv = cv;
+        this.setHabilidades(habilidades);
     }
 
     @Override
@@ -24,7 +22,4 @@ public class Candidato extends Usuario {
         System.out.println("Registrando candidato: " + nombre);
     }
 
-    // Getter y setter de CV
-    public String getCv() { return cv; }
-    public void setCv(String cv) { this.cv = cv; }
 }

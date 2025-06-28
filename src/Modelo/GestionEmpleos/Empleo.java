@@ -8,26 +8,65 @@ package Modelo.GestionEmpleos;
  *
  * @author josue
  */
-import java.util.List;
+import java.util.Date;
 
 public class Empleo {
-    private String titulo;
+    private String modalidad;
+    private double salario;
     private String descripcion;
-    private List<String> requisitos;
+    private Date fechaPublicacion;
+    private String area;
 
-    public Empleo(String titulo, String descripcion, List<String> requisitos) {
-        this.titulo = titulo;
+    // Constructor
+
+    public Empleo(String modalidad, double salario, Date fechaPublicacion, String descripcion, String area) {
+        this.modalidad = modalidad;
+        this.salario = salario;
         this.descripcion = descripcion;
-        this.requisitos = requisitos;
+        this.fechaPublicacion = fechaPublicacion;
+        this.area = area;
+    }
+    
+
+    public String getModalidad() {
+        return modalidad;
     }
 
-    // Getters y setters
-    public String getTitulo() { return titulo; }
-    public void setTitulo(String titulo) { this.titulo = titulo; }
+    public void setModalidad(String modalidad) {
+        this.modalidad = modalidad;
+    }
 
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public double getSalario() {
+        return salario;
+    }
 
-    public List<String> getRequisitos() { return requisitos; }
-    public void setRequisitos(List<String> requisitos) { this.requisitos = requisitos; }
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Date getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public void setFechaPublicacion(Date fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+    
+    
 }

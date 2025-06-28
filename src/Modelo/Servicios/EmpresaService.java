@@ -10,16 +10,19 @@ package Modelo.Servicios;
  */
 import Modelo.Core.Empresa;
 import Modelo.GestionEmpleos.Empleo;
+import Repository.EmpresaRepository;
 
 public class EmpresaService {
+    
+    private EmpresaRepository empresaRepository;
 
-    public void publicarVacante(Empresa empresa, Empleo vacante) {
-        // Lógica para publicar vacante
-        System.out.println("Vacante publicada por " + empresa.getNombre());
+    public EmpresaService() {
+        this.empresaRepository = new EmpresaRepository();
+    }
+    
+    
+    public void crearEmpresa(Empresa empresa){
+        empresaRepository.crear(empresa);
     }
 
-    public void subirVideo(Empresa empresa, Video video) {
-        // Lógica para subir video
-        System.out.println("Video subido por " + empresa.getNombre());
-    }
 }

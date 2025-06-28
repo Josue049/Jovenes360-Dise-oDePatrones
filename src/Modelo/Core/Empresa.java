@@ -11,11 +11,13 @@ package Modelo.Core;
 public class Empresa extends Usuario {
     private String ruc;
     private String rubro;
+    private String direccion;
 
-    public Empresa(String nombre, String email, String contraseña, String ruc, String rubro) {
+    public Empresa(String nombre, String email, String contraseña, String ruc, String rubro, String direccion) {
         super(nombre, email, contraseña, Rol.EMPRESA);
         this.ruc = ruc;
         this.rubro = rubro;
+        this.direccion = direccion;
     }
 
     @Override
@@ -30,4 +32,12 @@ public class Empresa extends Usuario {
 
     public String getRubro() { return rubro; }
     public void setRubro(String rubro) { this.rubro = rubro; }
+
+    public String getDireccion() {
+        return direccion;
+    }
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+    
 }

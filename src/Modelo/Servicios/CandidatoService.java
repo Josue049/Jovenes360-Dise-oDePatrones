@@ -9,15 +9,22 @@ package Modelo.Servicios;
  * @author josue
  */
 import Modelo.Core.Candidato;
-import Modelo.GestionEmpleos.Empleo;
 import Modelo.Certificaciones.Certificado;
+import Repository.CandidatoRepository;
 
 public class CandidatoService {
+    
+    private CandidatoRepository candidatoRepository;
 
-    public void postular(Candidato candidato, Empleo empleo) {
-        // Lógica para postular a un empleo
-        System.out.println(candidato.getNombre() + " postulo a " + empleo.getTitulo());
+    public CandidatoService() {
+        this.candidatoRepository = new CandidatoRepository();
     }
+
+    
+    public void crearCandidato(Candidato candidato){
+        candidatoRepository.crear(candidato);
+    }
+
 
     public void subirCertificado(Candidato candidato, Certificado cert) {
         // Lógica para subir certificado
