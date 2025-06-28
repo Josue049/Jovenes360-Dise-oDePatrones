@@ -19,7 +19,7 @@ public class Empleo {
 
     // Constructor
 
-    public Empleo(String modalidad, double salario, Date fechaPublicacion, String descripcion, String area) {
+    public Empleo(String modalidad, double salario, String descripcion, Date fechaPublicacion, String area) {
         this.modalidad = modalidad;
         this.salario = salario;
         this.descripcion = descripcion;

@@ -9,8 +9,9 @@ package Modelo.Recomendaciones;
  * @author josue
  */
 import Modelo.Core.Usuario;
+import Modelo.GestionEmpleos.Empleo;
 import java.util.List;
 
 public interface Recomendador {
-    List<String> generarRecomendaciones(Usuario usuario);
+    List<Empleo> generarRecomendaciones(List<String> habil);
 }

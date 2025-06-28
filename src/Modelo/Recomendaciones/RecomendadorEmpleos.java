@@ -37,22 +37,26 @@ public class RecomendadorEmpleos implements Recomendador {
 
     List<Empleo> listaEmpleos = List.of(empleo1, empleo2, empleo3);
 
-    @Override
-    public List<String> generarRecomendaciones(Usuario usuario) {
-        List<String> habilidadesUsuario = usuario.getHabilidades();
-
-        // Crear filtro con habilidades y lista completa de empleos
-        FiltroHabilidades filtro = new FiltroHabilidades(habilidadesUsuario, listaEmpleos);
-
-        // Obtener empleos compatibles usando el filtro (que devuelve List<Empleo>)
-        List<Empleo> empleosCompatibles = filtro.filtrarEmpleosCompatibles();
-        
-        System.out.println("Empleos Recomendados: ");
-        // Devolver títulos de esos empleos
-        return empleosCompatibles.stream()
-            .map(Empleo::getTitulo)
+   @Override
+    public List<Empleo> generarRecomendaciones(List<String> habilidadesUsuario) {
+        return listaEmpleos.stream()
+            .filter(empleo -> tieneCoincidencias(empleo, habilidadesUsuario))
             .collect(Collectors.toList());
     }
 
+    private boolean tieneCoincidencias(Empleo empleo, List<String> habilidadesUsuario) {
+        // Convertir ambas listas a minúsculas para comparación case-insensitive
+        List<String> requisitosEmpleo = empleo.getRequisitos().stream()
+            .map(String::toLowerCase)
+            .collect(Collectors.toList());
+
+        List<String> habilidadesUser = habilidadesUsuario.stream()
+            .map(String::toLowerCase)
+            .collect(Collectors.toList());
+
+        // Verificar si alguna habilidad del usuario coincide con los requisitos
+        return habilidadesUser.stream()
+            .anyMatch(requisitosEmpleo::contains);
+    }
 
 }
